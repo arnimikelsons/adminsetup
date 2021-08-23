@@ -1,0 +1,13 @@
+<h1>Show Gender</h1>
+
+<ul>
+
+  <li>
+    <strong>Gender:</strong>
+    <%= @gender.gender %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.gender_path(@conn, :edit, @gender) %></span>
+<span><%= link "Back", to: Routes.gender_path(@conn, :index) %></span>

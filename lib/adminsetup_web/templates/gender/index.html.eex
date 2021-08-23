@@ -1,0 +1,26 @@
+<h1>Listing Genders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Gender</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for gender <- @genders do %>
+    <tr>
+      <td><%= gender.gender %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.gender_path(@conn, :show, gender) %></span>
+        <span><%= link "Edit", to: Routes.gender_path(@conn, :edit, gender) %></span>
+        <span><%= link "Delete", to: Routes.gender_path(@conn, :delete, gender), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Gender", to: Routes.gender_path(@conn, :new) %></span>

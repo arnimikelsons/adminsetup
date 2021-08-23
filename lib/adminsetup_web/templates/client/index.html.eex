@@ -1,0 +1,51 @@
+<h1>Listing Clients</h1>
+<div class = "row search-box">
+  <div class = "col-12 col-md-4">
+  <%= form_for @conn, Routes.client_path(@conn, :index), [method: :get, class: "filter-form"], fn f -> %>
+
+      <h2>Search by</h2>
+        <%= label f, :name %>
+        <%= search_input f, :name %>
+
+        <%= label f, :location %>
+        <%= search_input f, :location %>
+
+        <%= label f, "Sort by" %>
+        <%= select f, :sort_by, ["Name": "name", "Location": "location"] %>
+      </div>
+        <div>
+          <%= submit "Filter" %>
+        </div>
+  <% end %>
+</div>
+  <div class="col-12 col-md-4">
+    <%= link "Download clients", to: Routes.client_path(@conn, :export), target: "_blank", class: "pull-right" %>
+  </div>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Gender</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for client <- @clients do %>
+    <tr>
+      <td><%= client.name %></td>
+      <td><%= client.location %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.client_path(@conn, :show, client) %></span>
+        <span><%= link "Edit", to: Routes.client_path(@conn, :edit, client) %></span>
+        <span><%= link "Delete", to: Routes.client_path(@conn, :delete, client), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Client", to: Routes.client_path(@conn, :new) %></span>
